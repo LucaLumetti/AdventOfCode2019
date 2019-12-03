@@ -48,12 +48,7 @@ function getPoints(path){
 let pA = getPoints(A)
 let pB = getPoints(B)
 
-let cross = []
-
-Object.keys(pA).forEach(k => {
-  if(pB[k])
-    cross.push(k)
-})
+let cross = Object.keys(pA).filter(k => pB[k])
 
 let part1 = cross
   .map(p => p.split(',')
