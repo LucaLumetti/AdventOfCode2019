@@ -55,14 +55,14 @@ Object.keys(pA).forEach(k => {
     cross.push(k)
 })
 
-let part1 = [...cross]
+let part1 = cross
   .map(p => p.split(',')
     .map(Number)
     .map(Math.abs)
     .reduce((a,b)=>a+b)
   )
 
-let part2 = [...cross]
+let part2 = cross
   .map(p => pA[p]+pB[p])
 
 console.log(Math.min(...part1))
