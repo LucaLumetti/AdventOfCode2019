@@ -14,8 +14,10 @@ const OPCODE = {
     '08': 3
 }
 
-function execute (memory){
-        memory = memory.map(Number)
+function execute (input, memory){
+    let output = 0
+
+    memory = memory.map(Number)
     for(let i = 0; i < memory.length;){
         memory[i] = `0000${memory[i]}`
         let opcode = memory[i].substr(memory[i].length-2,memory[i].length)
@@ -40,9 +42,9 @@ function execute (memory){
         if(opcode == 2)
             memory[third] = memory[first] * memory[second]
         if(opcode == 3)
-            memory[first] = 1
+            memory[first] = input
         if(opcode == 4)
-            console.log("OUT: " + memory[first])
+            output = memory[first]
         if(opcode == 5)
             i = memory[first]?memory[second]:i
         if(opcode == 6)
@@ -53,7 +55,8 @@ function execute (memory){
             memory[third] = memory[first]==memory[second]?1:0
     }
 
-    return memory[0]
+    return output
 }
 
-execute(input.split(','))
+console.log(execute(1, input.split(',')))
+console.log(execute(5, input.split(',')))

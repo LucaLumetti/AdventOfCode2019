@@ -1,6 +1,6 @@
 f = open('input', 'r')
 f = f.readlines()[0].split(',')
-f = list(map(lambda x: int(x), f))
+f = [int(x) for x in f]
 
 def execute(noun, verb, memory):
     memory[1] = noun

@@ -3,8 +3,8 @@ let input = fs.readFileSync('input', 'utf-8').trim().split('\n').map(v=>v.split(
 
 let orbits = {}
 input.forEach(o => {
-    let a = `${o[0]}`
-    let b = `${o[1]}`
+    let a = o[0]
+    let b = o[1]
 
     if(!orbits[a])
         orbits[a] = {id: a, ch: []}
@@ -25,7 +25,7 @@ function countWalk(com, i){
 }
 
 function hasP(com, p){
-    if(com.ch.filter(k => k.id == p.id).length > 0)
+    if(com.ch.indexOf(p) > -1)
         return true
     let f = false
     for(let i = 0; i < com.ch.length; i++){
@@ -42,7 +42,7 @@ function findCommonPlanet(com){
 }
 
 function stepsTo(com, p){
-    if(com.ch.filter(k => k.id == p.id).length > 0)
+    if(com.ch.indexOf(p) > -1)
         return 0
     return 1+stepsTo(com.ch.filter(k => hasP(k, p))[0], p)
 }
