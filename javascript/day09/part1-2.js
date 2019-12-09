@@ -71,10 +71,8 @@ function execute (inputs, memory){
             memory[third] = memory[first] * memory[second]
         if(opcode == 3)
             memory[first] = inputs[kk++]
-        if(opcode == 4){
+        if(opcode == 4)
            output = memory[first]
-            console.log(`OUT: ${output}`)
-        }
         if(opcode == 5)
             i = memory[first]?memory[second]:i
         if(opcode == 6)
@@ -90,5 +88,5 @@ function execute (inputs, memory){
     return output
 }
 
-let r = execute([2], input.split(','))
-console.log(r)
+console.log(execute([1], input.split(',')))
+console.log(execute([2], input.split(',')))
