@@ -57,7 +57,6 @@ class IntCode {
 
         this.ip += this.OPCODES[op]+1
         if(op === 99){
-            console.log('SYSTEM HALT')
             this.halt = true
         }else if(op == 1){
             this.memory[third] = this.memory[first]+this.memory[second]
@@ -174,23 +173,6 @@ while(!computer.halt){
     computer.run()
     robot.input(computer.output())
 }
-
-let c = Object.keys(robot.map)
-    .map(k => {
-        let x = k.split(',')[0]
-        let y = Number(k.split(',')[1])
-        return `${x},${y}`
-    })
-    .sort((a, b) => {
-    let x1 = a.split(',')[0]
-    let y1 = a.split(',')[1]
-    let x2 = b.split(',')[0]
-    let y2 = b.split(',')[1]
-
-    if(y1 != y2) return y2-y1
-    return x1-x2
-})
-
 
 for(let j = 0; j < 6; j++){
     for(let i = 1; i < 40; i++){
