@@ -78,8 +78,6 @@ class IntCode {
         }else if(op == 3){
             this.memory[first] = this.inputs.shift()
         }else if(op == 4){
-//            process.stdout.write(String.fromCharCode(this.memory[first]))
-            console.log(this.memory[first])
             this.outputs.push(this.memory[first])
         }else if(op == 5){
             this.ip = this.memory[first]!=0?this.memory[second]:this.ip
@@ -111,4 +109,4 @@ let computer = new IntCode(input.split(',').map(Number))
 while(!computer.halt){
     computer.step()
 }
-console.log(computer.outputs.reduce((a, b)=>a+b))
+console.log(computer.outputs.pop())
