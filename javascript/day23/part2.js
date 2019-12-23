@@ -2,6 +2,7 @@ const fs = require('fs')
 
 let input = fs.readFileSync('input', 'utf-8').trim()
 
+let NAT_SEND = [+Infinity,+Infinity]
 class IntCode {
     constructor(memory){
         this.memory = [...memory]
@@ -108,8 +109,11 @@ class IntCode {
                 let X = this.outputs[1]
                 let Y = this.outputs[2]
                 if(ADDR === 255){
-                    console.log(Y)
-                    process.exit(0)
+                    if(NAT_SEND[1] === Y){
+                        console.log(X, Y)
+                        process.exit(0)
+                    }
+                    NAT_SEND = [X, Y]
                 }else{
                     this.computers[ADDR].input(X)
                     this.computers[ADDR].input(Y)
@@ -155,5 +159,15 @@ computers.forEach(c =>{
 
 let s = 0
 while(computers.filter(c => !c.halt).length > 0){
+
+    let r = computers.filter(c => !c.is_waiting).length
+    let t = computers.map(c => !c.is_waiting)
+    if(r !== s){
+        s = r
+    }
+    if(computers.filter(c => c.is_waiting).length >= 50){
+        computers[0].input(NAT_SEND[0])
+        computers[0].input(NAT_SEND[1])
+    }
     computers.forEach(c => c.step())
 }
